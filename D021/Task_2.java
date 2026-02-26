@@ -1,7 +1,27 @@
 import java.util.Scanner;
 
 public class Main {
-    public static boolean isPalindrome(String s, int left, int right) {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+        
+        for (int i = 0; i < str.length(); i++) {
+            StringBuilder sb = new StringBuilder(str);
+            String candidate = sb.deleteCharAt(i).toString();
+            
+            if (isPalindrome(candidate)) {
+                System.out.println("YES");
+                return;
+            }
+        }
+        
+        System.out.println("NO");
+    }
+    
+    public static boolean isPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        
         while (left < right) {
             if (s.charAt(left) != s.charAt(right)) {
                 return false;
@@ -10,24 +30,5 @@ public class Main {
             right--;
         }
         return true;
-    }
-    
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        int left = 0, right = s.length() - 1;
-        while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) {
-                if (isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1)) {
-                    System.out.println("YES");
-                } else {
-                    System.out.println("NO");
-                }
-                return;
-            }
-            left++;
-            right--;
-        }
-        System.out.println("YES");
     }
 }
